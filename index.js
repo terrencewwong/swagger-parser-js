@@ -19,6 +19,14 @@ class Schema {
     return this.spec.info
   }
 
+  title () {
+    return this.spec.info.title
+  }
+
+  description () {
+    return this.spec.info.description
+  }
+
   version () {
     return this.spec.info.version
   }
