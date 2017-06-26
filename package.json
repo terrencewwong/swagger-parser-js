@@ -1,5 +1,7 @@
 {
   "name": "swagger-parser-js",
+  "description": "parse swagger specs into things you care about",
+  "repository": "https://github.com/wongterrencew/swagger-parser-js.git",
   "main": "index.js",
   "author": "Terrence Wong <wongterrencew@gmail.com>",
   "license": "MIT",
