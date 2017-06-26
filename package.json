@@ -4,14 +4,30 @@
   "author": "Terrence Wong <wongterrencew@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "jest": "^20.0.4"
+    "husky": "^0.14.1",
+    "jest": "^20.0.4",
+    "lint-staged": "^4.0.0",
+    "prettier-standard": "^5.1.0",
+    "semantic-release": "^6.3.6",
+    "validate-commit-msg": "^2.12.2"
   },
   "dependencies": {
     "lodash.foreach": "^4.5.0",
     "lodash.map": "^4.6.0"
   },
+  "lint-staged": {
+    "linters": {
+      "*.js": [
+        "lint:js",
+        "git add"
+      ]
+    }
+  },
   "scripts": {
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "lint:js": "prettier-standard",
+    "precommit": "yarn lint-staged && yarn test",
+    "commit-msg": "validate-commit-msg"
   }
 }
