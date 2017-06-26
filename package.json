@@ -30,6 +30,7 @@
     "test:watch": "jest --watch",
     "lint:js": "prettier-standard",
     "precommit": "yarn lint-staged && yarn test",
-    "commit-msg": "validate-commit-msg"
+    "commit-msg": "validate-commit-msg",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   }
 }
