@@ -1,5 +1,13 @@
 const forEach = require('lodash.foreach')
-const OPERATION_METHODS = ["get", "put", "post", "delete", "options", "head", "patch"]
+const OPERATION_METHODS = [
+  'get',
+  'put',
+  'post',
+  'delete',
+  'options',
+  'head',
+  'patch'
+]
 const DEFAULT_TAG = 'default'
 
 class Schema {
@@ -64,13 +72,13 @@ class Schema {
       if (!tags.length) {
         taggedMap[DEFAULT_TAG]
           ? taggedMap[DEFAULT_TAG].push(operationObject)
-          : taggedMap[DEFAULT_TAG] = [operationObject]
+          : (taggedMap[DEFAULT_TAG] = [operationObject])
       }
 
       return tags.reduce((result, tag) => {
         result[tag]
           ? result[tag].push(operationObject)
-          : result[tag] = [operationObject]
+          : (result[tag] = [operationObject])
         return result
       }, taggedMap)
     }, {})
@@ -78,7 +86,7 @@ class Schema {
 
   tagDetails (tag) {
     const tags = this.tags()
-    return tags.find(({name}) => name === tag)
+    return tags.find(({ name }) => name === tag)
   }
 
   taggedOperations () {
@@ -129,7 +137,6 @@ class Schema {
   tags () {
     return this.spec.tags
   }
-
 }
 
 module.exports = Schema

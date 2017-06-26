@@ -70,28 +70,32 @@ describe('swagger-parser-js', () => {
     }
 
     expect(new Schema(schema).operationsWithTags()).toEqual({
-      'pets': [{
-        id: 'post-/pet',
-        method: 'post',
-        operation: {
-          summary: 'Add a new pet to the store',
-          tags: ['pets'],
-          consumes: 'consumes',
-          produces: 'produces'
-        },
-        path: '/pet'
-      }],
-      'carbon-neutral': [{
-        id: 'post-/hipster-things',
-        method: 'post',
-        operation: {
-          summary: 'some hipster stuff',
-          tags: ['carbon-neutral'],
-          consumes: 'consumes',
-          produces: 'produces'
-        },
-        path: '/hipster-things'
-      }]
+      pets: [
+        {
+          id: 'post-/pet',
+          method: 'post',
+          operation: {
+            summary: 'Add a new pet to the store',
+            tags: ['pets'],
+            consumes: 'consumes',
+            produces: 'produces'
+          },
+          path: '/pet'
+        }
+      ],
+      'carbon-neutral': [
+        {
+          id: 'post-/hipster-things',
+          method: 'post',
+          operation: {
+            summary: 'some hipster stuff',
+            tags: ['carbon-neutral'],
+            consumes: 'consumes',
+            produces: 'produces'
+          },
+          path: '/hipster-things'
+        }
+      ]
     })
   })
 
@@ -137,39 +141,43 @@ describe('swagger-parser-js', () => {
     }
 
     expect(new Schema(schema).taggedOperations()).toEqual({
-      'pets': {
+      pets: {
         tagDetails: {
           name: 'pets',
           description: 'pets are the best!'
         },
-        operations: [{
-          id: 'post-/pet',
-          method: 'post',
-          operation: {
-            summary: 'Add a new pet to the store',
-            tags: ['pets'],
-            consumes: 'consumes',
-            produces: 'produces'
-          },
-          path: '/pet'
-        }],
+        operations: [
+          {
+            id: 'post-/pet',
+            method: 'post',
+            operation: {
+              summary: 'Add a new pet to the store',
+              tags: ['pets'],
+              consumes: 'consumes',
+              produces: 'produces'
+            },
+            path: '/pet'
+          }
+        ]
       },
       'carbon-neutral': {
         tagDetails: {
           name: 'carbon-neutral',
           description: 'carbon neutral is also the best!'
         },
-        operations: [{
-          id: 'post-/hipster-things',
-          method: 'post',
-          operation: {
-            summary: 'some hipster stuff',
-            tags: ['carbon-neutral'],
-            consumes: 'consumes',
-            produces: 'produces'
-          },
-          path: '/hipster-things'
-        }]
+        operations: [
+          {
+            id: 'post-/hipster-things',
+            method: 'post',
+            operation: {
+              summary: 'some hipster stuff',
+              tags: ['carbon-neutral'],
+              consumes: 'consumes',
+              produces: 'produces'
+            },
+            path: '/hipster-things'
+          }
+        ]
       }
     })
   })
