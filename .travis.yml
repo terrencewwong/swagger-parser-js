@@ -21,7 +21,7 @@ script:
 
 deploy:
   provider: script
-  scrip: yarn build
+  script: yarn build
   skip_cleanup: true
   on:
     branch: master
