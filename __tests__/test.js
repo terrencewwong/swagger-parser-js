@@ -1,4 +1,4 @@
-const Schema = require('.')
+const Schema = require('../src')
 
 describe('swagger-parser-js', () => {
   it('operations', () => {
