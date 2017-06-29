@@ -26,4 +26,5 @@ schema.operationsWithTags()
 schema.taggedOperations()
 
 // TODO: document this way better
+// use flow as documentation?
 ```
