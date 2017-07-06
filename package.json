@@ -17,7 +17,8 @@
   },
   "dependencies": {
     "lodash.foreach": "^4.5.0",
-    "lodash.map": "^4.6.0"
+    "lodash.map": "^4.6.0",
+    "lodash.reduce": "^4.6.0"
   },
   "lint-staged": {
     "linters": {

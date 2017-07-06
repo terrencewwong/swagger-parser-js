@@ -1,4 +1,5 @@
 const forEach = require('lodash.foreach')
+const reduce = require('lodash.reduce')
 const OPERATION_METHODS = [
   'get',
   'put',
@@ -110,6 +111,33 @@ class Schema {
     return taggedMap
   }
 
+  taggedOperationsWithExamples () {
+    const taggedMap = this.taggedOperations()
+
+    forEach(taggedMap, ({ operations, tagDetails }, tag) => {
+      const operationsWithExamples = operations.map(operation => {
+        const { responses } = operation.operation
+        if (!responses) return operation
+
+        const response = responses['200']
+        if (!response) return operation
+
+        const { schema } = response
+        if (!schema) return operation
+
+        const exampleResponse = convertSchemaToExample(schema)
+
+        return Object.assign({}, operation, {
+          'x-response-example': exampleResponse
+        })
+      })
+
+      taggedMap[tag].operations = operationsWithExamples
+    })
+
+    return taggedMap
+  }
+
   consumes () {
     return this.spec.consumes
   }
@@ -147,4 +175,42 @@ class Schema {
   }
 }
 
+function convertSwaggerTypeToExample (type, name) {
+  switch (type) {
+    case 'integer':
+      return 0
+    case 'number':
+      return 0
+    case 'boolean':
+      return true
+    case 'string':
+      return name || type
+    default:
+      return type
+  }
+}
+
+function convertSchemaToExample (schema = {}, name) {
+  // base case, there is an example!
+  const { example } = schema
+  if (example) return example
+
+  switch (schema.type) {
+    case 'object':
+      const { properties } = schema
+      return reduce(
+        properties,
+        (example, schema, name) => {
+          example[name] = convertSchemaToExample(schema, name)
+          return example
+        },
+        {}
+      )
+    case 'array':
+      const { items } = schema
+      return [convertSchemaToExample(items)]
+    default:
+      return schema.default || convertSwaggerTypeToExample(schema.type, name)
+  }
+}
 module.exports = Schema

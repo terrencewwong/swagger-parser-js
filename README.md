@@ -25,6 +25,10 @@ schema.operationsWithTags()
 // returns a map of tags to objects containing tag details and an array of operations
 schema.taggedOperations()
 
+// returns a map of tags to objects containing tag details and an array of operations
+// each operation has an extra property `x-response-example`
+schema.taggedOperationsWithExamples()
+
 // TODO: document this way better
 // use flow as documentation?
 ```
