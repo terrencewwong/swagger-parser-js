@@ -35,6 +35,7 @@
   },
   "scripts": {
     "build": "babel src --out-dir lib",
+    "prepublish": "yarn test && yarn build",
     "test": "jest",
     "test:watch": "jest --watch",
     "lint:js": "prettier-standard",
