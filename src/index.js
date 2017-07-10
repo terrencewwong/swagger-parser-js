@@ -49,6 +49,13 @@ class Schema {
           return
         }
 
+        // Operation parameters should inherit default parameters from path
+        const pathParameters = path.parameters
+        if (pathParameters && pathParameters.length) {
+          const ownParameters = operation.parameters || []
+          operation.parameters = pathParameters.concat(ownParameters)
+        }
+
         list.push({
           path: pathName,
           method,

@@ -2,11 +2,16 @@ const Schema = require('../src')
 
 describe('swagger-parser-js', () => {
   it('operations', () => {
+    const pathParameters = [{ in: 'query', name: 'limit', type: 'number' }]
+    const getParameters = [{ in: 'query', name: 'type', type: 'string' }]
+
     const schema = {
       paths: {
         '/pet': {
-          post: {
-            summary: 'Add a new pet to the store'
+          parameters: pathParameters,
+          get: {
+            summary: 'get a pet',
+            parameters: getParameters
           }
         }
       }
@@ -14,9 +19,12 @@ describe('swagger-parser-js', () => {
 
     expect(new Schema(schema).operations()).toEqual([
       {
-        id: 'post-/pet',
-        method: 'post',
-        operation: { summary: 'Add a new pet to the store' },
+        id: 'get-/pet',
+        method: 'get',
+        operation: {
+          summary: 'get a pet',
+          parameters: pathParameters.concat(getParameters)
+        },
         path: '/pet'
       }
     ])
