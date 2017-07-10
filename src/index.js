@@ -119,7 +119,15 @@ class Schema {
         const { responses } = operation.operation
         if (!responses) return operation
 
-        const response = responses['200']
+        const responseStatuses = Object.keys(responses).filter(
+          status => status !== 'default'
+        )
+        // default is used for the error responses
+        if (!responseStatuses.length) return operation
+
+        // only get a response if its non error
+        // thus the example will be relevant to the endpont
+        const response = responses[responseStatuses[0]]
         if (!response) return operation
 
         const { schema } = response
